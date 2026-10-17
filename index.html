@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Для Карины ❤️</title>
+<style>
+  :root { --pink: #ff4d8d; --deep: #1a0b2e; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: radial-gradient(circle at 50% 30%, #3a1559 0%, var(--deep) 70%);
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  main {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 24px;
+    max-width: 720px;
+    width: 100%;
+  }
+  h1 {
+    font-size: clamp(1.6rem, 6vw, 2.8rem);
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+  .hint {
+    font-size: .95rem;
+    opacity: .6;
+    margin-bottom: 36px;
+  }
+  button {
+    font: inherit;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #ff4d8d, #ff8a4d);
+    border: 0;
+    border-radius: 999px;
+    padding: 16px 38px;
+    cursor: pointer;
+    box-shadow: 0 0 24px rgba(255, 77, 141, .6);
+    animation: pulse 1.6s ease-in-out infinite;
+    transition: transform .15s;
+  }
+  button:hover { transform: scale(1.08); }
+  button:active { transform: scale(.96); }
+  @keyframes pulse {
+    50% { box-shadow: 0 0 44px rgba(255, 77, 141, .95); }
+  }
+  .love {
+    display: none;
+    font-size: clamp(1.25rem, 4.6vw, 2rem);
+    font-weight: 600;
+    line-height: 1.5;
+    background: linear-gradient(90deg, #ff9ac1, #ffd36e, #ff6fb1, #ff9ac1);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(255, 105, 180, .35);
+    animation: shine 4s linear infinite, pop .9s cubic-bezier(.2, 1.4, .4, 1);
+  }
+  @keyframes shine { to { background-position: 300% 0; } }
+  @keyframes pop { from { opacity: 0; transform: scale(.6); } }
+  .revealed .intro { display: none; }
+  .revealed .love { display: block; }
+  .heart {
+    position: fixed;
+    bottom: -40px;
+    z-index: 1;
+    pointer-events: none;
+    animation: rise linear forwards;
+  }
+  @keyframes rise {
+    to { transform: translateY(-115vh) rotate(25deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<main id="app">
+  <div class="intro">
+    <h1>Ты правда думаешь что мне наплевать на тебя?</h1>
+    <p class="hint">Да я хочу знать</p>
+    <button id="btn" type="button">Хочу узнать</button>
+  </div>
+  <p class="love">Не знаю как ты обо мне думаешь, но я люблю тебя самым ужасным темпом, и думаю о тебе как сумасшедший Карина❤️</p>
+</main>
+<script>
+  const app = document.getElementById('app');
+  const emojis = ['❤️', '💖', '💗', '💕', '💘'];
+
+  function spawnHeart() {
+    const h = document.createElement('span');
+    h.className = 'heart';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = 16 + Math.random() * 32 + 'px';
+    h.style.animationDuration = 4 + Math.random() * 5 + 's';
+    document.body.appendChild(h);
+    h.addEventListener('animationend', () => h.remove());
+  }
+
+  document.getElementById('btn').addEventListener('click', () => {
+    app.classList.add('revealed');
+    for (let i = 0; i < 40; i++) setTimeout(spawnHeart, i * 60);
+    setInterval(spawnHeart, 350);
+  });
+</script>
+</body>
+</html>
